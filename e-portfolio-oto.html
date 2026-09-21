@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Portfolio — Nguyễn Văn A | Công Nghệ Ô Tô HueIC</title>
+  
+  <!-- Font chữ chuẩn Google Sites: Roboto & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================
+       GIAO DIỆN TỐI GIẢN — MÔ PHỎNG 100% CÁC KHỐI GOOGLE SITES
+       ========================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #2d3748;
+      background-color: #f7fafc;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 1. THANH TIÊU ĐỀ TRÊN CÙNG (Header Google Sites) */
+    .site-topbar {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 14px 0;
+    }
+
+    .topbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .site-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1a365d;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .site-nav a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #4a5568;
+      transition: color 0.15s ease;
+    }
+
+    .site-nav a:hover {
+      color: #c05621;
+    }
+
+    /* Menu con Dropdown */
+    .nav-dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .dropdown-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .dropdown-arrow {
+      font-size: 0.72rem;
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .nav-dropdown:hover .dropdown-arrow,
+    .nav-dropdown.is-open .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 255px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      padding: 6px 0;
+      z-index: 1000;
+      margin-top: 8px;
+      animation: navFadeIn 0.2s ease-out;
+    }
+
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+    }
+
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu,
+    .nav-dropdown.is-open .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      font-size: 0.88rem;
+      color: #2d3748;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover {
+      background: #fffaf0;
+      color: #c05621;
+      padding-left: 20px;
+    }
+
+    .dropdown-header-link {
+      font-weight: 700 !important;
+      color: #1a365d !important;
+      border-bottom: 1px dashed #e2e8f0;
+      margin-bottom: 4px;
+      padding-bottom: 8px !important;
+    }
+
+    .dropdown-header-link:hover {
+      background: #edf2f7 !important;
+      color: #1a365d !important;
+    }
+
+    @keyframes navFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Nút hamburger mở menu mobile */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #2d3748;
+      line-height: 1;
+    }
+
+    .menu-toggle:hover {
+      background: #f7fafc;
+      border-color: #a0aec0;
+    }
+
+    /* 2. BANNER CHÍNH (Banner Google Sites) */
+    .hero-banner {
+      background: #1a365d;
+      color: #ffffff;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .hero-banner h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .hero-banner p {
+      font-size: 1.05rem;
+      color: #cbd5e0;
+    }
+
+    /* KHỐI NỘI DUNG CHUNG (Section Google Sites) */
+    .content-section {
+      background: #ffffff;
+      margin: 24px auto;
+      padding: 32px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1a365d;
+      border-bottom: 2px solid #c05621;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    /* 3. KHỐI NỘI DUNG 2 CỘT (Khối giới thiệu Google Sites) */
+    .two-columns {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .profile-photo {
+      border-radius: 6px;
+      border: 1px solid #cbd5e0;
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .info-list {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    .info-list li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .info-list strong {
+      display: inline-block;
+      min-width: 130px;
+      color: #2d3748;
+    }
+
+    .bio-text {
+      font-size: 0.95rem;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    /* 4. KHỐI BẢNG ĐIỂM (Bảng Google Sites) */
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table.simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    table.simple-table th, table.simple-table td {
+      padding: 10px 14px;
+      border: 1px solid #e2e8f0;
+    }
+
+    table.simple-table th {
+      background: #edf2f7;
+      color: #1a365d;
+      font-weight: 700;
+    }
+
+    table.simple-table tr:nth-child(even) {
+      background: #f7fafc;
+    }
+
+    .score-good {
+      font-weight: 700;
+      color: #276749;
+    }
+
+    /* KHỐI TAB KẾT QUẢ HỌC TẬP (5 HỌC KỲ) */
+    .gpa-overall-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ebf8ff;
+      border: 1px solid #bee3f8;
+      color: #2b6cb0;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 16px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tab-btn {
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 10px 18px;
+      border: 1px solid #cbd5e0;
+      background: #edf2f7;
+      color: #4a5568;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: #e2e8f0;
+      color: #1a365d;
+    }
+
+    .tab-btn.active {
+      background: #1a365d;
+      color: #ffffff;
+      border-color: #1a365d;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    .semester-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #edf2f7;
+      border: 1px solid #e2e8f0;
+      border-top: none;
+      padding: 10px 16px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1a365d;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-radius: 0 0 4px 4px;
+    }
+
+    /* 5. KHỐI CÁC TRANG CON NHẬT KÝ THỰC HÀNH XƯỞNG (Bố cục lưới Google Sites) */
+    .subpage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .column-card {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .column-card:hover {
+      border-color: #cbd5e0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .column-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      margin-bottom: 14px;
+      border-radius: 4px;
+    }
+
+    .column-card h3 {
+      font-size: 1.12rem;
+      color: #1a365d;
+      margin-bottom: 8px;
+    }
+
+    .column-card p {
+      font-size: 0.9rem;
+      color: #4a5568;
+      line-height: 1.55;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .btn-subpage {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a365d;
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 4px;
+      align-self: flex-start;
+      transition: background 0.2s ease;
+    }
+
+    .btn-subpage:hover {
+      background: #c05621;
+    }
+
+    /* 6. DANH SÁCH GẠCH ĐẦU DÒNG (Bullet list) */
+    .bullet-list {
+      margin-left: 20px;
+      font-size: 0.95rem;
+      color: #4a5568;
+    }
+
+    .bullet-list li {
+      margin-bottom: 8px;
+    }
+
+    /* 7. NÚT BẤM (Button Google Sites) */
+    .btn-drive {
+      display: inline-block;
+      background: #c05621;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 10px 24px;
+      border-radius: 4px;
+      margin-top: 14px;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-drive:hover {
+      background: #9c4221;
+    }
+
+    /* FOOTER */
+    footer.site-footer {
+      text-align: center;
+      padding: 24px 0;
+      font-size: 0.85rem;
+      color: #718096;
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+
+    /* Responsive cho điện thoại */
+    @media (max-width: 768px) {
+      .topbar-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .site-nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        margin-top: 14px;
+        padding-top: 10px;
+        border-top: 1px solid #e2e8f0;
+      }
+      .site-nav.open {
+        display: flex;
+      }
+      .site-nav > a,
+      .site-nav .dropdown-toggle {
+        padding: 10px 0;
+        border-bottom: 1px solid #edf2f7;
+        font-size: 0.95rem;
+      }
+      .nav-dropdown {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .dropdown-toggle {
+        justify-content: space-between;
+        width: 100%;
+      }
+      .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        border-left: 2px solid #c05621;
+        border-radius: 0;
+        margin-top: 0;
+        margin-left: 10px;
+        padding: 4px 0 8px 10px;
+        background: #f7fafc;
+      }
+      .dropdown-menu a {
+        padding: 8px 0;
+        font-size: 0.88rem;
+        white-space: normal;
+      }
+      .dropdown-menu a:hover {
+        padding-left: 4px;
+      }
+      .two-columns {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .profile-photo {
+        max-width: 200px;
+        margin: 0 auto;
+      }
+      .info-list {
+        text-align: left;
+      }
+      .three-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. HEADER / LOGO TRANG WEB -->
+  <header class="site-topbar">
+    <div class="container topbar-content">
+      <div class="site-title"><a href="e-portfolio-oto.html">E-PORTFOLIO · NGUYỄN VĂN A</a></div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Mở/đóng menu" onclick="toggleNavMenu()">☰</button>
+      <nav class="site-nav" id="siteNav">
+        <a href="#gioithieu">Giới thiệu</a>
+        <a href="#hoctap">Kết quả học tập</a>
+        <div class="nav-dropdown" id="navDropdown">
+          <a href="#thuchanh" class="dropdown-toggle" onclick="handleDropdownClick(event)">
+            Thực hành xưởng <span class="dropdown-arrow">▾</span>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#thuchanh" class="dropdown-header-link">📌 Tổng quan 4 bài thực hành</a>
+            <a href="thuc-hanh-dong-co.html">🚗 1. Động cơ đốt trong</a>
+            <a href="thuc-hanh-dien-oto.html">⚡ 2. Điện – Điện tử ô tô</a>
+            <a href="thuc-hanh-khung-gam.html">🛞 3. Khung gầm &amp; Phanh</a>
+            <a href="bao-duong-chan-doan.html">🔧 4. Bảo dưỡng &amp; OBD-II</a>
+          </div>
+        </div>
+        <a href="#kynang">Kỹ năng</a>
+        <a href="#lienhe">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. BANNER CHÍNH CỦA TRANG (Google Sites Banner) -->
+  <section class="hero-banner">
+    <div class="container">
+      <h1>NGUYỄN VĂN A</h1>
+      <p>Sinh viên ngành Công nghệ Kỹ thuật Ô tô — Trường Cao đẳng Công nghiệp Huế</p>
+    </div>
+  </section>
+
+  <main class="container">
+    
+    <!-- 3. KHỐI GIỚI THIỆU BẢN THÂN (Bố cục 2 cột trên Google Sites) -->
+    <section class="content-section" id="gioithieu">
+      <h2 class="section-title">1. Giới thiệu bản thân</h2>
+      <div class="two-columns">
+        <!-- Cột 1: Hình ảnh -->
+        <div>
+          <img src="./assets/avatar.jpg" alt="Ảnh chân dung sinh viên" class="profile-photo">
+        </div>
+        <!-- Cột 2: Văn bản -->
+        <div>
+          <ul class="info-list">
+            <li><strong>Họ và tên:</strong> Nguyễn Văn A</li>
+            <li><strong>Mã sinh viên:</strong> 26CDOT09</li>
+            <li><strong>Lớp:</strong> Cao đẳng Kỹ thuật Ô tô K26</li>
+            <li><strong>Khoa:</strong> Cơ khí – Động lực</li>
+            <li><strong>Trường:</strong> Cao đẳng Công nghiệp Huế (HueIC)</li>
+            <li><strong>Niên khóa:</strong> 2026 – 2029</li>
+          </ul>
+          <p class="bio-text">
+            Em là sinh viên năm cuối ngành Công nghệ Kỹ thuật Ô tô tại Trường Cao đẳng Công nghiệp Huế. 
+            Em yêu thích công việc bảo dưỡng ô tô, sửa chữa động cơ và kiểm tra hệ thống điện – điện tử xe du lịch. 
+            Mục tiêu của em sau khi tốt nghiệp là trở thành một kỹ thuật viên sửa chữa ô tô lành nghề, làm việc chuyên nghiệp tại các garage và đại lý ô tô chính hãng.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. KHỐI KẾT QUẢ HỌC TẬP (Dạng Tab 5 Học kỳ) -->
+    <section class="content-section" id="hoctap">
+      <h2 class="section-title">2. Kết quả học tập theo từng học kỳ</h2>
+      
+      <!-- Huy hiệu điểm tích lũy chung -->
+      <div class="gpa-overall-badge">
+        <span>⭐ <strong>ĐIỂM TÍCH LŨY TOÀN KHÓA (GPA): 8.7 / 10</strong> · XẾP LOẠI DỰ KIẾN: <strong>GIỎI</strong> (92 TÍN CHỈ)</span>
+      </div>
+
+      <!-- Thanh chọn Tab 5 Học kỳ -->
+      <div class="tab-nav" role="tablist">
+        <button class="tab-btn active" onclick="switchSemesterTab(event, 'tab-hk1')">Học kỳ 1</button>
+        <button class="tab-btn" onclick="switchSemesterTab(event, 'tab-hk2')">Học kỳ 2</button>
+        <button class="tab-btn" onclick="switchSemesterTab(event, 'tab-hk3')">Học kỳ 3</button>
+        <button class="tab-btn" onclick="switchSemesterTab(event, 'tab-hk4')">Học kỳ 4</button>
+        <button class="tab-btn" onclick="switchSemesterTab(event, 'tab-hk5')">Học kỳ 5</button>
+      </div>
+
+      <!-- TAB HỌC KỲ 1 -->
+      <div class="tab-pane active" id="tab-hk1">
+        <div class="table-responsive">
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên Môn học / Mô-đun</th>
+                <th>Số tín chỉ</th>
+                <th>Điểm số</th>
+                <th>Xếp loại</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Vẽ kỹ thuật cơ khí &amp; AutoCAD 2D</td>
+                <td>3</td>
+                <td class="score-good">8.6</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Vật liệu cơ khí &amp; Công nghệ kim loại</td>
+                <td>3</td>
+                <td class="score-good">8.4</td>
+                <td>Khá Giỏi</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Cơ học cơ sở &amp; Sức bền vật liệu</td>
+                <td>3</td>
+                <td class="score-good">8.2</td>
+                <td>Khá</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Tin học văn phòng &amp; Kỹ thuật</td>
+                <td>2</td>
+                <td class="score-good">8.5</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Tiếng Anh cơ bản 1</td>
+                <td>3</td>
+                <td class="score-good">8.0</td>
+                <td>Khá</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Pháp luật đại cương &amp; Chính trị</td>
+                <td>2</td>
+                <td class="score-good">8.2</td>
+                <td>Khá</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>An toàn lao động &amp; Tiêu chuẩn 5S</td>
+                <td>2</td>
+                <td class="score-good">9.2</td>
+                <td>Xuất sắc</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="semester-summary">
+            <span>Tổng số tín chỉ: 18 tín chỉ</span>
+            <span>Điểm trung bình học kỳ 1: <strong>8.45 / 10</strong> (Xếp loại: Giỏi)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB HỌC KỲ 2 -->
+      <div class="tab-pane" id="tab-hk2">
+        <div class="table-responsive">
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên Môn học / Mô-đun</th>
+                <th>Số tín chỉ</th>
+                <th>Điểm số</th>
+                <th>Xếp loại</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Nhập môn Kỹ thuật Ô tô &amp; Đạo đức nghề</td>
+                <td>2</td>
+                <td class="score-good">9.0</td>
+                <td>Xuất sắc</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Lý thuyết ô tô &amp; Kết cấu tổng thành</td>
+                <td>3</td>
+                <td class="score-good">8.6</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Dung sai lắp ghép &amp; Kỹ thuật đo lường</td>
+                <td>3</td>
+                <td class="score-good">8.5</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Kỹ thuật nhiệt &amp; Khí động lực học</td>
+                <td>3</td>
+                <td class="score-good">8.2</td>
+                <td>Khá</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Kỹ thuật điện &amp; Điện tử cơ bản</td>
+                <td>3</td>
+                <td class="score-good">8.7</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Thực hành Nguội, Hàn &amp; Gia công cơ bản</td>
+                <td>4</td>
+                <td class="score-good">8.8</td>
+                <td>Giỏi</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="semester-summary">
+            <span>Tổng số tín chỉ: 18 tín chỉ</span>
+            <span>Điểm trung bình học kỳ 2: <strong>8.60 / 10</strong> (Xếp loại: Giỏi)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB HỌC KỲ 3 -->
+      <div class="tab-pane" id="tab-hk3">
+        <div class="table-responsive">
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên Môn học / Mô-đun</th>
+                <th>Số tín chỉ</th>
+                <th>Điểm số</th>
+                <th>Xếp loại</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Lý thuyết Động cơ đốt trong</td>
+                <td>3</td>
+                <td class="score-good">8.5</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Thực hành Tháo lắp &amp; Sửa chữa Động cơ xăng</td>
+                <td>4</td>
+                <td class="score-good">8.8</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Thực hành Tháo lắp &amp; Sửa chữa Động cơ Diesel</td>
+                <td>3</td>
+                <td class="score-good">8.4</td>
+                <td>Khá Giỏi</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Hệ thống truyền lực ô tô (Hộp số, ly hợp)</td>
+                <td>3</td>
+                <td class="score-good">8.5</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Thực hành Hệ thống phanh, lái &amp; treo</td>
+                <td>4</td>
+                <td class="score-good">8.7</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Tiếng Anh chuyên ngành ô tô 1</td>
+                <td>2</td>
+                <td class="score-good">8.0</td>
+                <td>Khá</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="semester-summary">
+            <span>Tổng số tín chỉ: 19 tín chỉ</span>
+            <span>Điểm trung bình học kỳ 3: <strong>8.55 / 10</strong> (Xếp loại: Giỏi)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB HỌC KỲ 4 -->
+      <div class="tab-pane" id="tab-hk4">
+        <div class="table-responsive">
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên Môn học / Mô-đun</th>
+                <th>Số tín chỉ</th>
+                <th>Điểm số</th>
+                <th>Xếp loại</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Hệ thống Điện – Điện tử ô tô</td>
+                <td>3</td>
+                <td class="score-good">9.0</td>
+                <td>Xuất sắc</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Thực hành Mạch điện thân xe &amp; Chiếu sáng</td>
+                <td>4</td>
+                <td class="score-good">9.2</td>
+                <td>Xuất sắc</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Hệ thống phun xăng điện tử (EFI) &amp; CRDi</td>
+                <td>3</td>
+                <td class="score-good">8.8</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Thực hành Hệ thống điều hòa không khí ô tô</td>
+                <td>3</td>
+                <td class="score-good">8.7</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Chẩn đoán kỹ thuật ô tô &amp; Máy quét OBD-II</td>
+                <td>3</td>
+                <td class="score-good">8.9</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Công nghệ Xe điện (EV) &amp; Hybrid cơ bản</td>
+                <td>2</td>
+                <td class="score-good">8.6</td>
+                <td>Giỏi</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="semester-summary">
+            <span>Tổng số tín chỉ: 18 tín chỉ</span>
+            <span>Điểm trung bình học kỳ 4: <strong>8.90 / 10</strong> (Xếp loại: Giỏi)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB HỌC KỲ 5 -->
+      <div class="tab-pane" id="tab-hk5">
+        <div class="table-responsive">
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên Môn học / Mô-đun</th>
+                <th>Số tín chỉ</th>
+                <th>Điểm số</th>
+                <th>Xếp loại</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Thực hành Quy trình Bảo dưỡng định kỳ ô tô</td>
+                <td>4</td>
+                <td class="score-good">9.0</td>
+                <td>Xuất sắc</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Thực tập tốt nghiệp tại Garage Toyota / Hyundai</td>
+                <td>6</td>
+                <td class="score-good">9.2</td>
+                <td>Xuất sắc</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Đồ án chuyên ngành Công nghệ Kỹ thuật Ô tô</td>
+                <td>3</td>
+                <td class="score-good">8.8</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Quản trị xưởng dịch vụ &amp; Cố vấn dịch vụ</td>
+                <td>2</td>
+                <td class="score-good">8.6</td>
+                <td>Giỏi</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Khóa luận / Thi tốt nghiệp chuyên môn</td>
+                <td>4</td>
+                <td class="score-good">9.0</td>
+                <td>Xuất sắc</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="semester-summary">
+            <span>Tổng số tín chỉ: 19 tín chỉ</span>
+            <span>Điểm trung bình học kỳ 5: <strong>9.00 / 10</strong> (Xếp loại: Xuất sắc)</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 5. KHỐI NHẬT KÝ THỰC HÀNH XƯỞNG (Các Trang Con Chi Tiết) -->
+    <section class="content-section" id="thuchanh">
+      <h2 class="section-title">3. Nhật ký thực hành tại xưởng (Các bài thực hành chuyên sâu)</h2>
+      <p style="font-size:0.95rem;color:#4a5568;margin-bottom:20px;">
+        Bấm vào từng bài thực hành bên dưới để xem báo cáo trang con chi tiết: quy trình tháo lắp, số liệu đo kiểm thực tế và dụng cụ sử dụng.
+      </p>
+
+      <div class="subpage-grid">
+        
+        <!-- Trang con 1 -->
+        <div class="column-card">
+          <img src="./assets/workshop_hueic.jpg" alt="Thực hành Động cơ đốt trong">
+          <h3>1. Thực Hành Động Cơ Đốt Trong</h3>
+          <p>Tháo rã cụm động cơ xăng Toyota 1NZ-FE: kiểm tra độ phẳng nắp máy, đo khe hở nhiệt xupap, cân cam và siết nắp quy-lát theo góc.</p>
+          <a href="thuc-hanh-dong-co.html" class="btn-subpage">
+            👉 Xem báo cáo chi tiết trang con ➔
+          </a>
+        </div>
+
+        <!-- Trang con 2 -->
+        <div class="column-card">
+          <img src="./assets/ev_battery.jpg" alt="Thực hành Điện ô tô">
+          <h3>2. Thực Hành Điện – Điện Tử &amp; Xe Điện</h3>
+          <p>Đấu nối mạch điện thân xe, kiểm tra chổi than &amp; dàn diode máy phát điện xoay chiều, đo cảm biến EFI bằng VOM và an toàn khối pin xe điện.</p>
+          <a href="thuc-hanh-dien-oto.html" class="btn-subpage">
+            👉 Xem báo cáo chi tiết trang con ➔
+          </a>
+        </div>
+
+        <!-- Trang con 3 -->
+        <div class="column-card">
+          <img src="./assets/eco_car.jpg" alt="Thực hành Khung gầm">
+          <h3>3. Thực Hành Khung Gầm &amp; Phanh</h3>
+          <p>Bảo dưỡng cụm phanh đĩa thủy lực, đo độ dày &amp; độ đảo mặt đĩa phanh bằng đồng hồ so, xả gió dầu phanh và kiểm tra các khớp rotuyn lái.</p>
+          <a href="thuc-hanh-khung-gam.html" class="btn-subpage">
+            👉 Xem báo cáo chi tiết trang con ➔
+          </a>
+        </div>
+
+        <!-- Trang con 4 -->
+        <div class="column-card">
+          <img src="./assets/workshop_hueic.jpg" alt="Bảo dưỡng & Chẩn đoán OBD-II">
+          <h3>4. Bảo Dưỡng Nhanh &amp; Chẩn Đoán OBD-II</h3>
+          <p>Quy trình bảo dưỡng định kỳ Quick Service 10.000km và phân tích xử lý thực tế các mã lỗi động cơ P0171 (nghèo xăng), P0300 (bỏ lửa) bằng máy quét.</p>
+          <a href="bao-duong-chan-doan.html" class="btn-subpage">
+            👉 Xem báo cáo chi tiết trang con ➔
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. KHỐI KỸ NĂNG & CHỨNG CHỈ (Khối văn bản danh sách trên Google Sites) -->
+    <section class="content-section" id="kynang">
+      <h2 class="section-title">4. Kỹ năng &amp; Chứng chỉ</h2>
+      
+      <h3 style="font-size:1.05rem;color:#1a365d;margin-bottom:8px;">Kỹ năng chuyên môn:</h3>
+      <ul class="bullet-list" style="margin-bottom:20px;">
+        <li>Thực hiện đúng quy trình bảo dưỡng định kỳ xe ô tô (thay dầu nhớt, lọc gió, kiểm tra gầm).</li>
+        <li>Sử dụng thành thạo các thiết bị đo kiểm: đồng hồ vạn năng VOM, cờ lê cân lực, thước kẹp cơ khí.</li>
+        <li>Biết sử dụng máy quét lỗi OBD-II (G-scan / Launch) để đọc và xóa mã lỗi động cơ cơ bản.</li>
+        <li>Đọc hiểu sơ đồ mạch điện thân xe cơ bản và tài liệu kỹ thuật tiếng Anh.</li>
+      </ul>
+
+      <h3 style="font-size:1.05rem;color:#1a365d;margin-bottom:8px;">Bằng cấp &amp; Chứng chỉ:</h3>
+      <ul class="bullet-list">
+        <li><strong>Giấy phép lái xe ô tô hạng B2</strong> (Đã có bằng, tự tin vận hành xe).</li>
+        <li><strong>Chứng nhận An toàn vệ sinh lao động &amp; 5S</strong> tại xưởng thực hành HueIC.</li>
+        <li><strong>Tin học văn phòng &amp; AutoCAD 2D</strong> (Đạt chuẩn đầu ra trường HueIC).</li>
+        <li><strong>Kinh nghiệm thực tập:</strong> Thực tập kỹ thuật viên bảo dưỡng tại Garage Toyota / Hyundai Huế.</li>
+      </ul>
+    </section>
+
+    <!-- 7. KHỐI LIÊN HỆ & NÚT TẢI CV (Khối liên hệ & Button Google Sites) -->
+    <section class="content-section" id="lienhe">
+      <h2 class="section-title">5. Thông tin liên hệ</h2>
+      <ul class="info-list">
+        <li><strong>Họ tên sinh viên:</strong> Nguyễn Văn A</li>
+        <li><strong>Số điện thoại:</strong> 090 123 4567</li>
+        <li><strong>Hộp thư Email:</strong> nguyenvana@students.hueic.edu.vn</li>
+        <li><strong>Địa chỉ trường:</strong> 70 Nguyễn Huệ, Phương Thuận Hoá, Thành phố Huế</li>
+      </ul>
+
+      <!-- Nút bấm (Button trên Google Sites) -->
+      <a href="https://drive.google.com" target="_blank" rel="noopener" class="btn-drive">
+        📄 XEM &amp; TẢI CV TRÊN GOOGLE DRIVE
+      </a>
+    </section>
+
+  </main>
+
+  <!-- 8. CHÂN TRANG (Footer Google Sites) -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 E-Portfolio Cá Nhân — Nguyễn Văn A | Lớp CĐ Ô tô K26 — Trường Cao đẳng Công nghiệp Huế</p>
+    </div>
+  </footer>
+
+  <script>
+    function switchSemesterTab(evt, tabId) {
+      // Ẩn tất cả các bảng học kỳ
+      var panes = document.querySelectorAll('.tab-pane');
+      for (var i = 0; i < panes.length; i++) {
+        panes[i].classList.remove('active');
+      }
+
+      // Xóa trạng thái active của các nút tab
+      var btns = document.querySelectorAll('.tab-btn');
+      for (var j = 0; j < btns.length; j++) {
+        btns[j].classList.remove('active');
+      }
+
+      // Hiển thị tab được bấm
+      document.getElementById(tabId).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    // Điều khiển mở/đóng menu trên mobile
+    function toggleNavMenu() {
+      var nav = document.getElementById('siteNav');
+      if (nav) {
+        nav.classList.toggle('open');
+      }
+    }
+
+    // Xử lý chạm mở menu con trên màn hình cảm ứng / mobile
+    function handleDropdownClick(evt) {
+      if (window.innerWidth <= 768) {
+        evt.preventDefault();
+        var dropdown = document.getElementById('navDropdown');
+        if (dropdown) {
+          dropdown.classList.toggle('is-open');
+        }
+      }
+    }
+
+    // Tự động đóng menu con và mobile menu khi click ra ngoài
+    document.addEventListener('click', function(e) {
+      var dropdown = document.getElementById('navDropdown');
+      var toggle = document.getElementById('menuToggle');
+      var nav = document.getElementById('siteNav');
+      if (dropdown && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('is-open');
+      }
+      if (toggle && nav && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>

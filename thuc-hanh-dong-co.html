@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhật Ký Thực Hành Động Cơ Đốt Trong — Nguyễn Văn A | HueIC</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', Arial, sans-serif; color: #2d3748; background-color: #f7fafc; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; border-radius: 6px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+    /* HEADER */
+    .site-topbar { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 14px 0; }
+    .topbar-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .site-title { font-size: 1.15rem; font-weight: 700; color: #1a365d; }
+    .site-nav { display: flex; align-items: center; gap: 18px; }
+    .site-nav a { font-size: 0.92rem; font-weight: 500; color: #4a5568; transition: color 0.15s ease; }
+    .site-nav a:hover { color: #c05621; }
+
+    /* Menu con Dropdown */
+    .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+    .dropdown-toggle { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+    .dropdown-arrow { font-size: 0.72rem; transition: transform 0.2s ease; display: inline-block; }
+    .nav-dropdown:hover .dropdown-arrow, .nav-dropdown.is-open .dropdown-arrow { transform: rotate(180deg); }
+    .dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 0; min-width: 260px;
+      background: #ffffff; border-radius: 8px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0; padding: 6px 0; z-index: 1000; margin-top: 8px;
+      animation: navFadeIn 0.2s ease-out;
+    }
+    .dropdown-menu::before { content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+    .nav-dropdown:hover .dropdown-menu, .nav-dropdown:focus-within .dropdown-menu, .nav-dropdown.is-open .dropdown-menu { display: block; }
+    .dropdown-menu a {
+      display: flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 0.88rem;
+      color: #2d3748; font-weight: 500; text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease; white-space: nowrap;
+    }
+    .dropdown-menu a:hover { background: #fffaf0; color: #c05621; padding-left: 20px; }
+    .dropdown-header-link { font-weight: 700 !important; color: #1a365d !important; border-bottom: 1px dashed #e2e8f0; margin-bottom: 4px; padding-bottom: 8px !important; }
+    .dropdown-header-link:hover { background: #edf2f7 !important; color: #1a365d !important; }
+    @keyframes navFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Nút hamburger mở menu mobile */
+    .menu-toggle { display: none; background: transparent; border: 1px solid #cbd5e0; border-radius: 4px; padding: 5px 10px; font-size: 1.2rem; cursor: pointer; color: #2d3748; line-height: 1; }
+    .menu-toggle:hover { background: #f7fafc; border-color: #a0aec0; }
+
+    /* BANNER CON */
+    .subpage-banner { background: #1a365d; color: #ffffff; padding: 36px 0; }
+    .breadcrumbs { font-size: 0.85rem; color: #cbd5e0; margin-bottom: 10px; }
+    .breadcrumbs a { color: #fed7aa; text-decoration: underline; }
+    .subpage-banner h1 { font-size: 1.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+    .subpage-banner p { font-size: 0.95rem; color: #e2e8f0; }
+
+    /* KHỐI NỘI DUNG */
+    .content-box { background: #ffffff; margin: 24px auto; padding: 32px; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #1a365d; border-bottom: 2px solid #c05621; padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
+
+    /* THÔNG TIN BÀI THỰC HÀNH */
+    .meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: #edf2f7; padding: 16px; border-radius: 6px; margin-bottom: 24px; font-size: 0.92rem; }
+    .meta-grid strong { color: #1a365d; }
+
+    /* CÁC BƯỚC THAO TÁC */
+    .step-block { margin-bottom: 24px; padding-left: 18px; border-left: 3px solid #c05621; }
+    .step-title { font-size: 1.08rem; font-weight: 700; color: #1a365d; margin-bottom: 8px; }
+    .step-desc { font-size: 0.92rem; color: #4a5568; margin-bottom: 10px; }
+    
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 12px 0; }
+    .data-table th, .data-table td { padding: 9px 12px; border: 1px solid #e2e8f0; }
+    .data-table th { background: #edf2f7; color: #1a365d; }
+    .val-pass { color: #276749; font-weight: 700; }
+
+    .img-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; margin: 20px 0; }
+
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; flex-wrap: wrap; gap: 12px; }
+    .btn-action { display: inline-block; background: #c05621; color: #fff; font-weight: 700; font-size: 0.9rem; padding: 10px 20px; border-radius: 4px; }
+    .btn-action:hover { background: #9c4221; }
+    .btn-secondary { background: #edf2f7; color: #1a365d; border: 1px solid #cbd5e0; }
+    .btn-secondary:hover { background: #e2e8f0; }
+
+    footer.site-footer { text-align: center; padding: 24px 0; font-size: 0.85rem; color: #718096; border-top: 1px solid #e2e8f0; background: #ffffff; }
+
+    @media (max-width: 768px) {
+      .topbar-content { flex-direction: row; justify-content: space-between; align-items: center; }
+      .menu-toggle { display: block; }
+      .site-nav {
+        display: none; width: 100%; flex-direction: column; align-items: stretch;
+        gap: 0; margin-top: 14px; padding-top: 10px; border-top: 1px solid #e2e8f0;
+      }
+      .site-nav.open { display: flex; }
+      .site-nav > a, .site-nav .dropdown-toggle { padding: 10px 0; border-bottom: 1px solid #edf2f7; font-size: 0.95rem; }
+      .nav-dropdown { flex-direction: column; align-items: stretch; }
+      .dropdown-toggle { justify-content: space-between; width: 100%; }
+      .dropdown-menu {
+        position: static; box-shadow: none; border: none; border-left: 2px solid #c05621;
+        border-radius: 0; margin-top: 0; margin-left: 10px; padding: 4px 0 8px 10px; background: #f7fafc;
+      }
+      .dropdown-menu a { padding: 8px 0; font-size: 0.88rem; white-space: normal; }
+      .dropdown-menu a:hover { padding-left: 4px; }
+      .meta-grid, .img-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-topbar">
+    <div class="container topbar-content">
+      <div class="site-title"><a href="e-portfolio-oto.html">E-PORTFOLIO · NGUYỄN VĂN A</a></div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Mở/đóng menu" onclick="toggleNavMenu()">☰</button>
+      <nav class="site-nav" id="siteNav">
+        <a href="e-portfolio-oto.html">Trang chủ</a>
+        <a href="e-portfolio-oto.html#gioithieu">Giới thiệu</a>
+        <a href="e-portfolio-oto.html#hoctap">Học tập</a>
+        <div class="nav-dropdown" id="navDropdown">
+          <a href="e-portfolio-oto.html#thuchanh" class="dropdown-toggle" style="color:#c05621;font-weight:700;" onclick="handleDropdownClick(event)">
+            Thực hành xưởng <span class="dropdown-arrow">▾</span>
+          </a>
+          <div class="dropdown-menu">
+            <a href="e-portfolio-oto.html#thuchanh" class="dropdown-header-link">📌 Tổng quan 4 bài thực hành</a>
+            <a href="thuc-hanh-dong-co.html" style="background:#fffaf0;color:#c05621;font-weight:700;">🚗 1. Động cơ đốt trong (Đang xem)</a>
+            <a href="thuc-hanh-dien-oto.html">⚡ 2. Điện – Điện tử ô tô</a>
+            <a href="thuc-hanh-khung-gam.html">🛞 3. Khung gầm &amp; Phanh</a>
+            <a href="bao-duong-chan-doan.html">🔧 4. Bảo dưỡng &amp; OBD-II</a>
+          </div>
+        </div>
+        <a href="e-portfolio-oto.html#kynang">Kỹ năng</a>
+        <a href="e-portfolio-oto.html#lienhe">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BANNER CON -->
+  <section class="subpage-banner">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="e-portfolio-oto.html">Trang chủ E-Portfolio</a> / <a href="e-portfolio-oto.html#thuchanh">Nhật ký thực hành xưởng</a> / Thực hành Động cơ
+      </div>
+      <h1>Nhật Ký Thực Hành: Động Cơ Đốt Trong</h1>
+      <p>Mô-đun thực hành tháo rã, đo kiểm chi tiết cơ khí và lắp ráp cân chỉnh động cơ xăng 4 xy-lanh tại xưởng HueIC</p>
+    </div>
+  </section>
+
+  <main class="container">
+    
+    <!-- THÔNG TIN CHUNG VỀ BÀI THỰC HÀNH -->
+    <article class="content-box">
+      <h2 class="section-title">1. Thông tin mô-đun thực hành</h2>
+      <div class="meta-grid">
+        <div><strong>Môn học:</strong> Thực hành Động cơ đốt trong (4 Tín chỉ)</div>
+        <div><strong>Địa điểm:</strong> Xưởng Động lực — Trường CĐ Công nghiệp Huế</div>
+        <div><strong>Đối tượng thực hành:</strong> Động cơ xăng Toyota 1NZ-FE (1.5L)</div>
+        <div><strong>Thời lượng:</strong> 60 tiết thực hành xưởng</div>
+        <div><strong>Điểm đánh giá:</strong> 8.8 / 10 (Xếp loại: Giỏi)</div>
+        <div><strong>Tiêu chuẩn an toàn:</strong> 100% tuân thủ bảo hộ lao động &amp; 5S</div>
+      </div>
+
+      <h2 class="section-title">2. Trang thiết bị &amp; Dụng cụ sử dụng</h2>
+      <p style="font-size:0.95rem;color:#4a5568;margin-bottom:14px;">
+        Trong suốt quá trình thực hành, em đã trực tiếp sử dụng thành thạo các thiết bị chuyên dụng:
+      </p>
+      <ul style="margin-left:20px;margin-bottom:20px;font-size:0.92rem;color:#4a5568;">
+        <li>Bộ khẩu tuýp KingTony 1/2 inch và cần xiết tự động.</li>
+        <li><strong>Cần xiết cân lực (Torque Wrench):</strong> Dùng để siết nắp quy-lát và nắp ổ đỡ trục khuỷu theo đúng lực hãng.</li>
+        <li><strong>Dụng cụ đo cơ khí chính xác:</strong> Thước lá (Feeler Gauge) đo khe hở nhiệt xupap, Panme đo ngoài (Micrometer), Thước cặp cơ khí và Đồng hồ so đo độ rơ dọc trục.</li>
+        <li>Thiết bị ép lò xo xupap và cảo tháo bánh răng cam.</li>
+      </ul>
+
+      <div class="img-grid">
+        <img src="./assets/workshop_hueic.jpg" alt="Sinh viên HueIC thực hành tháo lắp động cơ">
+        <div>
+          <h3 style="font-size:1.1rem;color:#1a365d;margin-bottom:8px;">Khu vực thực hành động cơ xưởng HueIC</h3>
+          <p style="font-size:0.9rem;color:#4a5568;">
+            Hình ảnh em cùng các bạn trong nhóm tiến hành đo khe hở xupap và kiểm tra độ phẳng mặt nắp máy bằng thước thẳng và thước lá.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="section-title">3. Nhật ký các bước thực hiện &amp; Số liệu thực tế</h2>
+
+      <!-- Bước 1 -->
+      <div class="step-block">
+        <div class="step-title">Bước 1: Tháo rã nắp máy &amp; Kiểm tra độ cong vênh</div>
+        <p class="step-desc">
+          Tháo nắp giàn cò, tháo cụm trục cam nạp và xả theo đúng thứ tự từ ngoài vào trong để tránh nứt gãy trục cam. 
+          Sử dụng thước thẳng kim loại đặt theo các đường chéo và đường thẳng trên mặt máy, dùng thước lá 0.05mm kiểm tra.
+        </p>
+        <p style="font-size:0.9rem;color:#276749;font-weight:600;">➔ Kết quả: Mặt nắp máy phẳng, độ vênh &lt; 0.03mm (Chuẩn cho phép &lt; 0.05mm).</p>
+      </div>
+
+      <!-- Bước 2 -->
+      <div class="step-block">
+        <div class="step-title">Bước 2: Đo khe hở nhiệt xupap nạp và xả</div>
+        <p class="step-desc">
+          Quay trục khuỷu đưa máy 1 về điểm chết trên (TDC) kỳ nén; tiến hành dùng thước lá đo khe hở giữa vấu cam và con đội:
+        </p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Vị trí xupap</th>
+              <th>Tiêu chuẩn hãng Toyota</th>
+              <th>Số đo thực tế đo được</th>
+              <th>Đánh giá</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Xupap Nạp (Xylanh 1, 2)</td>
+              <td>0.15 – 0.25 mm</td>
+              <td>0.20 mm</td>
+              <td class="val-pass">Đạt tiêu chuẩn</td>
+            </tr>
+            <tr>
+              <td>Xupap Xả (Xylanh 1, 3)</td>
+              <td>0.25 – 0.35 mm</td>
+              <td>0.30 mm</td>
+              <td class="val-pass">Đạt tiêu chuẩn</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Bước 3 -->
+      <div class="step-block">
+        <div class="step-title">Bước 3: Lắp ráp, cân cam &amp; Siết nắp quy-lát theo góc</div>
+        <p class="step-desc">
+          Làm sạch bề mặt thân máy, lắp gioăng quy-lát mới. Đặt đúng dấu xích cam trùng với dấu khắc trên bánh răng cam và bánh răng trục khuỷu. 
+          Siết 10 bulong nắp máy theo hình xoắn ốc từ trong ra ngoài:
+          <strong>Giai đoạn 1:</strong> Siết lực 29 N·m ➔ <strong>Giai đoạn 2:</strong> Siết thêm góc 90° ➔ <strong>Giai đoạn 3:</strong> Siết thêm góc 90°.
+        </p>
+      </div>
+
+      <h2 class="section-title">4. Bài học kinh nghiệm &amp; Đánh giá</h2>
+      <p style="font-size:0.92rem;color:#4a5568;line-height:1.6;">
+        Qua mô-đun này, em đã nắm vững quy trình tháo lắp chuẩn công nghiệp, rèn luyện được tính cẩn thận khi dùng thước đo chính xác và hiểu sâu sắc tầm quan trọng của việc siết lực theo đúng thông số của nhà sản xuất để chống rò rỉ khí nén và nước làm mát.
+      </p>
+
+      <!-- Nút điều hướng các trang con -->
+      <div class="nav-buttons">
+        <a href="e-portfolio-oto.html#thuchanh" class="btn-action btn-secondary">⬅ Quay lại Trang chủ E-Portfolio</a>
+        <a href="thuc-hanh-dien-oto.html" class="btn-action">Xem tiếp: Thực hành Điện – Điện tử Ô tô ➡</a>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 E-Portfolio Cá Nhân — Nguyễn Văn A | Lớp CĐ Ô tô K47 — Trường Cao đẳng Công nghiệp Huế</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNavMenu() {
+      var nav = document.getElementById('siteNav');
+      if (nav) nav.classList.toggle('open');
+    }
+
+    function handleDropdownClick(evt) {
+      if (window.innerWidth <= 768) {
+        evt.preventDefault();
+        var dropdown = document.getElementById('navDropdown');
+        if (dropdown) dropdown.classList.toggle('is-open');
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      var dropdown = document.getElementById('navDropdown');
+      var toggle = document.getElementById('menuToggle');
+      var nav = document.getElementById('siteNav');
+      if (dropdown && !dropdown.contains(e.target)) dropdown.classList.remove('is-open');
+      if (toggle && nav && !nav.contains(e.target) && !toggle.contains(e.target)) nav.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>

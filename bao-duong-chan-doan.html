@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhật Ký Bảo Dưỡng &amp; Chẩn Đoán OBD-II — Nguyễn Văn A | HueIC</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', Arial, sans-serif; color: #2d3748; background-color: #f7fafc; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; border-radius: 6px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+    /* HEADER */
+    .site-topbar { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 14px 0; }
+    .topbar-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .site-title { font-size: 1.15rem; font-weight: 700; color: #1a365d; }
+    .site-nav { display: flex; align-items: center; gap: 18px; }
+    .site-nav a { font-size: 0.92rem; font-weight: 500; color: #4a5568; transition: color 0.15s ease; }
+    .site-nav a:hover { color: #c05621; }
+
+    /* Menu con Dropdown */
+    .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+    .dropdown-toggle { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+    .dropdown-arrow { font-size: 0.72rem; transition: transform 0.2s ease; display: inline-block; }
+    .nav-dropdown:hover .dropdown-arrow, .nav-dropdown.is-open .dropdown-arrow { transform: rotate(180deg); }
+    .dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 0; min-width: 260px;
+      background: #ffffff; border-radius: 8px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0; padding: 6px 0; z-index: 1000; margin-top: 8px;
+      animation: navFadeIn 0.2s ease-out;
+    }
+    .dropdown-menu::before { content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+    .nav-dropdown:hover .dropdown-menu, .nav-dropdown:focus-within .dropdown-menu, .nav-dropdown.is-open .dropdown-menu { display: block; }
+    .dropdown-menu a {
+      display: flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 0.88rem;
+      color: #2d3748; font-weight: 500; text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease; white-space: nowrap;
+    }
+    .dropdown-menu a:hover { background: #fffaf0; color: #c05621; padding-left: 20px; }
+    .dropdown-header-link { font-weight: 700 !important; color: #1a365d !important; border-bottom: 1px dashed #e2e8f0; margin-bottom: 4px; padding-bottom: 8px !important; }
+    .dropdown-header-link:hover { background: #edf2f7 !important; color: #1a365d !important; }
+    @keyframes navFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Nút hamburger mở menu mobile */
+    .menu-toggle { display: none; background: transparent; border: 1px solid #cbd5e0; border-radius: 4px; padding: 5px 10px; font-size: 1.2rem; cursor: pointer; color: #2d3748; line-height: 1; }
+    .menu-toggle:hover { background: #f7fafc; border-color: #a0aec0; }
+
+    /* BANNER CON */
+    .subpage-banner { background: #1a365d; color: #ffffff; padding: 36px 0; }
+    .breadcrumbs { font-size: 0.85rem; color: #cbd5e0; margin-bottom: 10px; }
+    .breadcrumbs a { color: #fed7aa; text-decoration: underline; }
+    .subpage-banner h1 { font-size: 1.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+    .subpage-banner p { font-size: 0.95rem; color: #e2e8f0; }
+
+    /* KHỐI NỘI DUNG */
+    .content-box { background: #ffffff; margin: 24px auto; padding: 32px; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #1a365d; border-bottom: 2px solid #c05621; padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
+
+    /* THÔNG TIN BÀI THỰC HÀNH */
+    .meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: #edf2f7; padding: 16px; border-radius: 6px; margin-bottom: 24px; font-size: 0.92rem; }
+    .meta-grid strong { color: #1a365d; }
+
+    /* CÁC BƯỚC THAO TÁC */
+    .step-block { margin-bottom: 24px; padding-left: 18px; border-left: 3px solid #c05621; }
+    .step-title { font-size: 1.08rem; font-weight: 700; color: #1a365d; margin-bottom: 8px; }
+    .step-desc { font-size: 0.92rem; color: #4a5568; margin-bottom: 10px; }
+    
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 12px 0; }
+    .data-table th, .data-table td { padding: 9px 12px; border: 1px solid #e2e8f0; }
+    .data-table th { background: #edf2f7; color: #1a365d; }
+    .val-pass { color: #276749; font-weight: 700; }
+
+    .img-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; margin: 20px 0; }
+
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; flex-wrap: wrap; gap: 12px; }
+    .btn-action { display: inline-block; background: #c05621; color: #fff; font-weight: 700; font-size: 0.9rem; padding: 10px 20px; border-radius: 4px; }
+    .btn-action:hover { background: #9c4221; }
+    .btn-secondary { background: #edf2f7; color: #1a365d; border: 1px solid #cbd5e0; }
+    .btn-secondary:hover { background: #e2e8f0; }
+
+    footer.site-footer { text-align: center; padding: 24px 0; font-size: 0.85rem; color: #718096; border-top: 1px solid #e2e8f0; background: #ffffff; }
+
+    @media (max-width: 768px) {
+      .topbar-content { flex-direction: row; justify-content: space-between; align-items: center; }
+      .menu-toggle { display: block; }
+      .site-nav {
+        display: none; width: 100%; flex-direction: column; align-items: stretch;
+        gap: 0; margin-top: 14px; padding-top: 10px; border-top: 1px solid #e2e8f0;
+      }
+      .site-nav.open { display: flex; }
+      .site-nav > a, .site-nav .dropdown-toggle { padding: 10px 0; border-bottom: 1px solid #edf2f7; font-size: 0.95rem; }
+      .nav-dropdown { flex-direction: column; align-items: stretch; }
+      .dropdown-toggle { justify-content: space-between; width: 100%; }
+      .dropdown-menu {
+        position: static; box-shadow: none; border: none; border-left: 2px solid #c05621;
+        border-radius: 0; margin-top: 0; margin-left: 10px; padding: 4px 0 8px 10px; background: #f7fafc;
+      }
+      .dropdown-menu a { padding: 8px 0; font-size: 0.88rem; white-space: normal; }
+      .dropdown-menu a:hover { padding-left: 4px; }
+      .meta-grid, .img-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-topbar">
+    <div class="container topbar-content">
+      <div class="site-title"><a href="e-portfolio-oto.html">E-PORTFOLIO · NGUYỄN VĂN A</a></div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Mở/đóng menu" onclick="toggleNavMenu()">☰</button>
+      <nav class="site-nav" id="siteNav">
+        <a href="e-portfolio-oto.html">Trang chủ</a>
+        <a href="e-portfolio-oto.html#gioithieu">Giới thiệu</a>
+        <a href="e-portfolio-oto.html#hoctap">Học tập</a>
+        <div class="nav-dropdown" id="navDropdown">
+          <a href="e-portfolio-oto.html#thuchanh" class="dropdown-toggle" style="color:#c05621;font-weight:700;" onclick="handleDropdownClick(event)">
+            Thực hành xưởng <span class="dropdown-arrow">▾</span>
+          </a>
+          <div class="dropdown-menu">
+            <a href="e-portfolio-oto.html#thuchanh" class="dropdown-header-link">📌 Tổng quan 4 bài thực hành</a>
+            <a href="thuc-hanh-dong-co.html">🚗 1. Động cơ đốt trong</a>
+            <a href="thuc-hanh-dien-oto.html">⚡ 2. Điện – Điện tử ô tô</a>
+            <a href="thuc-hanh-khung-gam.html">🛞 3. Khung gầm &amp; Phanh</a>
+            <a href="bao-duong-chan-doan.html" style="background:#fffaf0;color:#c05621;font-weight:700;">🔧 4. Bảo dưỡng &amp; OBD-II (Đang xem)</a>
+          </div>
+        </div>
+        <a href="e-portfolio-oto.html#kynang">Kỹ năng</a>
+        <a href="e-portfolio-oto.html#lienhe">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BANNER CON -->
+  <section class="subpage-banner">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="e-portfolio-oto.html">Trang chủ E-Portfolio</a> / <a href="e-portfolio-oto.html#thuchanh">Nhật ký thực hành xưởng</a> / Chẩn đoán OBD-II
+      </div>
+      <h1>Nhật Ký: Bảo Dưỡng Nhanh &amp; Chẩn Đoán Lỗi OBD-II</h1>
+      <p>Quy trình bảo dưỡng định kỳ và các ca bắt bệnh thực tế sử dụng máy chẩn đoán Launch/G-scan tại HueIC</p>
+    </div>
+  </section>
+
+  <main class="container">
+    
+    <article class="content-box">
+      <h2 class="section-title">1. Thông tin chuyên đề thực hành</h2>
+      <div class="meta-grid">
+        <div><strong>Môn học:</strong> Chẩn đoán kỹ thuật ô tô &amp; Bảo dưỡng định kỳ</div>
+        <div><strong>Địa điểm:</strong> Xưởng chẩn đoán ô tô HueIC &amp; Garage Toyota Huế</div>
+        <div><strong>Thiết bị:</strong> Máy đọc lỗi Launch X431, G-scan 2, VOM số</div>
+        <div><strong>Thời lượng:</strong> 45 tiết thực hành chuyên sâu</div>
+        <div><strong>Điểm đánh giá:</strong> 8.9 / 10 (Xếp loại: Giỏi)</div>
+        <div><strong>Kỹ năng cốt lõi:</strong> Đọc Live Data, khoanh vùng mã lỗi DTC</div>
+      </div>
+
+      <h2 class="section-title">2. Quy trình bảo dưỡng nhanh (Quick Service 10.000 km)</h2>
+      <p style="font-size:0.92rem;color:#4a5568;margin-bottom:14px;">
+        Em đã thuần thục các bước bảo dưỡng cấp tiêu chuẩn trong thời gian 45 phút cho 1 xe:
+      </p>
+      <ul style="margin-left:20px;margin-bottom:20px;font-size:0.92rem;color:#4a5568;">
+        <li>Kiểm tra hệ thống đèn chiếu sáng, gạt mưa, còi và nâng hạ kính.</li>
+        <li>Xả dầu nhớt động cơ, thay cốc lọc dầu mới (bôi trơn gioăng cao su, siết lực 3/4 vòng sau khi tiếp xúc).</li>
+        <li>Vệ sinh hoặc thay thế lọc gió động cơ, lọc gió điều hòa cabin.</li>
+        <li>Kiểm tra mức nước làm mát, dầu trợ lực lái, dầu phanh và châm nước rửa kính.</li>
+        <li>Kiểm tra áp suất lốp (2.2 – 2.4 bar) và đảo lốp nếu cần thiết.</li>
+      </ul>
+
+      <div class="img-grid">
+        <img src="./assets/workshop_hueic.jpg" alt="Chẩn đoán xe tại xưởng ô tô HueIC">
+        <div>
+          <h3 style="font-size:1.1rem;color:#1a365d;margin-bottom:8px;">Bắt bệnh bằng máy chẩn đoán kết nối OBD-II</h3>
+          <p style="font-size:0.9rem;color:#4a5568;">
+            Cắm giắc OBD-II 16 chân dưới vô-lăng, bật khóa điện ON, quét toàn bộ hệ thống ECU xe (Động cơ, Phanh ABS, Túi khí SRS, Hộp số AT).
+          </p>
+        </div>
+      </div>
+
+      <h2 class="section-title">3. Nhật ký các ca xử lý mã lỗi DTC thực tế</h2>
+
+      <!-- Ca 1 -->
+      <div class="step-block">
+        <div class="step-title">Ca 1: Mã lỗi P0171 — Hỗn hợp nhiên liệu quá nghèo (Bank 1)</div>
+        <p class="step-desc">
+          <strong>Hiện tượng:</strong> Xe có hiện tượng hụt ga khi đạp thốc ga, đèn Check Engine sáng vàng.<br>
+          <strong>Dữ liệu Live Data:</strong> Short Term Fuel Trim (STFT) = +19.5% và Long Term (LTFT) = +14% (chứng tỏ ECU đang phải phun bù xăng vì lọt gió ngoài).<br>
+          <strong>Quy trình xử lý:</strong> Kiểm tra đường ống nạp khí sau bướm ga phát hiện rách gioăng cao su cổ hút. Tiến hành thay mới gioăng, vệ sinh cảm biến MAF bằng dung dịch chuyên dụng. Xóa mã lỗi, chạy thử STFT quay về dao động quanh 0% ± 2%.
+        </p>
+      </div>
+
+      <!-- Ca 2 -->
+      <div class="step-block">
+        <div class="step-title">Ca 2: Mã lỗi P0300 / P0301 — Bỏ lửa xy-lanh số 1 (Cylinder 1 Misfire)</div>
+        <p class="step-desc">
+          <strong>Hiện tượng:</strong> Động cơ nổ rung giật ở chế độ không tải, ống xả có mùi xăng sống nồng.<br>
+          <strong>Quy trình xử lý:</strong> Hoán đổi bô-bin đánh lửa của máy 1 sang máy 2, xóa mã lỗi và nổ máy lại: mã lỗi đổi thành P0302 ➔ kết luận chính xác bô-bin máy 1 bị chập cuộn dây thứ cấp. Thay mới 1 cây bô-bin và cân chỉnh lại khe hở 4 bugi ở mức 1.1mm.
+        </p>
+      </div>
+
+      <h2 class="section-title">4. Đúc kết kinh nghiệm làm nghề</h2>
+      <p style="font-size:0.92rem;color:#4a5568;line-height:1.6;">
+        Việc sử dụng máy đọc lỗi giúp tiết kiệm rất nhiều thời gian, nhưng kỹ thuật viên không được "thay đồ mù quáng theo mã lỗi". Cần phải kết hợp đọc dữ liệu thời gian thực (Live Data) và đo kiểm thủ công bằng đồng hồ VOM trước khi quyết định thay thế phụ tùng cho khách hàng.
+      </p>
+
+      <div class="nav-buttons">
+        <a href="thuc-hanh-khung-gam.html" class="btn-action btn-secondary">⬅ Bài trước: Thực hành Khung gầm</a>
+        <a href="e-portfolio-oto.html#thuchanh" class="btn-action">🏠 Về Mục lục Nhật ký thực hành xưởng</a>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 E-Portfolio Cá Nhân — Nguyễn Văn A | Lớp CĐ Ô tô K47 — Trường Cao đẳng Công nghiệp Huế</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNavMenu() {
+      var nav = document.getElementById('siteNav');
+      if (nav) nav.classList.toggle('open');
+    }
+
+    function handleDropdownClick(evt) {
+      if (window.innerWidth <= 768) {
+        evt.preventDefault();
+        var dropdown = document.getElementById('navDropdown');
+        if (dropdown) dropdown.classList.toggle('is-open');
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      var dropdown = document.getElementById('navDropdown');
+      var toggle = document.getElementById('menuToggle');
+      var nav = document.getElementById('siteNav');
+      if (dropdown && !dropdown.contains(e.target)) dropdown.classList.remove('is-open');
+      if (toggle && nav && !nav.contains(e.target) && !toggle.contains(e.target)) nav.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>

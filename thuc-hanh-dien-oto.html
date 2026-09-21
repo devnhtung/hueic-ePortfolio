@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhật Ký Thực Hành Điện – Điện Tử Ô Tô — Nguyễn Văn A | HueIC</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', Arial, sans-serif; color: #2d3748; background-color: #f7fafc; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; border-radius: 6px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+    /* HEADER */
+    .site-topbar { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 14px 0; }
+    .topbar-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .site-title { font-size: 1.15rem; font-weight: 700; color: #1a365d; }
+    .site-nav { display: flex; align-items: center; gap: 18px; }
+    .site-nav a { font-size: 0.92rem; font-weight: 500; color: #4a5568; transition: color 0.15s ease; }
+    .site-nav a:hover { color: #c05621; }
+
+    /* Menu con Dropdown */
+    .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+    .dropdown-toggle { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+    .dropdown-arrow { font-size: 0.72rem; transition: transform 0.2s ease; display: inline-block; }
+    .nav-dropdown:hover .dropdown-arrow, .nav-dropdown.is-open .dropdown-arrow { transform: rotate(180deg); }
+    .dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 0; min-width: 260px;
+      background: #ffffff; border-radius: 8px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0; padding: 6px 0; z-index: 1000; margin-top: 8px;
+      animation: navFadeIn 0.2s ease-out;
+    }
+    .dropdown-menu::before { content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+    .nav-dropdown:hover .dropdown-menu, .nav-dropdown:focus-within .dropdown-menu, .nav-dropdown.is-open .dropdown-menu { display: block; }
+    .dropdown-menu a {
+      display: flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 0.88rem;
+      color: #2d3748; font-weight: 500; text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease; white-space: nowrap;
+    }
+    .dropdown-menu a:hover { background: #fffaf0; color: #c05621; padding-left: 20px; }
+    .dropdown-header-link { font-weight: 700 !important; color: #1a365d !important; border-bottom: 1px dashed #e2e8f0; margin-bottom: 4px; padding-bottom: 8px !important; }
+    .dropdown-header-link:hover { background: #edf2f7 !important; color: #1a365d !important; }
+    @keyframes navFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Nút hamburger mở menu mobile */
+    .menu-toggle { display: none; background: transparent; border: 1px solid #cbd5e0; border-radius: 4px; padding: 5px 10px; font-size: 1.2rem; cursor: pointer; color: #2d3748; line-height: 1; }
+    .menu-toggle:hover { background: #f7fafc; border-color: #a0aec0; }
+
+    /* BANNER CON */
+    .subpage-banner { background: #1a365d; color: #ffffff; padding: 36px 0; }
+    .breadcrumbs { font-size: 0.85rem; color: #cbd5e0; margin-bottom: 10px; }
+    .breadcrumbs a { color: #fed7aa; text-decoration: underline; }
+    .subpage-banner h1 { font-size: 1.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+    .subpage-banner p { font-size: 0.95rem; color: #e2e8f0; }
+
+    /* KHỐI NỘI DUNG */
+    .content-box { background: #ffffff; margin: 24px auto; padding: 32px; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .section-title { font-size: 1.25rem; font-weight: 700; color: #1a365d; border-bottom: 2px solid #c05621; padding-bottom: 8px; margin-bottom: 20px; text-transform: uppercase; }
+
+    /* THÔNG TIN BÀI THỰC HÀNH */
+    .meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: #edf2f7; padding: 16px; border-radius: 6px; margin-bottom: 24px; font-size: 0.92rem; }
+    .meta-grid strong { color: #1a365d; }
+
+    /* CÁC BƯỚC THAO TÁC */
+    .step-block { margin-bottom: 24px; padding-left: 18px; border-left: 3px solid #c05621; }
+    .step-title { font-size: 1.08rem; font-weight: 700; color: #1a365d; margin-bottom: 8px; }
+    .step-desc { font-size: 0.92rem; color: #4a5568; margin-bottom: 10px; }
+    
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 12px 0; }
+    .data-table th, .data-table td { padding: 9px 12px; border: 1px solid #e2e8f0; }
+    .data-table th { background: #edf2f7; color: #1a365d; }
+    .val-pass { color: #276749; font-weight: 700; }
+
+    .img-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; margin: 20px 0; }
+
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; flex-wrap: wrap; gap: 12px; }
+    .btn-action { display: inline-block; background: #c05621; color: #fff; font-weight: 700; font-size: 0.9rem; padding: 10px 20px; border-radius: 4px; }
+    .btn-action:hover { background: #9c4221; }
+    .btn-secondary { background: #edf2f7; color: #1a365d; border: 1px solid #cbd5e0; }
+    .btn-secondary:hover { background: #e2e8f0; }
+
+    footer.site-footer { text-align: center; padding: 24px 0; font-size: 0.85rem; color: #718096; border-top: 1px solid #e2e8f0; background: #ffffff; }
+
+    @media (max-width: 768px) {
+      .topbar-content { flex-direction: row; justify-content: space-between; align-items: center; }
+      .menu-toggle { display: block; }
+      .site-nav {
+        display: none; width: 100%; flex-direction: column; align-items: stretch;
+        gap: 0; margin-top: 14px; padding-top: 10px; border-top: 1px solid #e2e8f0;
+      }
+      .site-nav.open { display: flex; }
+      .site-nav > a, .site-nav .dropdown-toggle { padding: 10px 0; border-bottom: 1px solid #edf2f7; font-size: 0.95rem; }
+      .nav-dropdown { flex-direction: column; align-items: stretch; }
+      .dropdown-toggle { justify-content: space-between; width: 100%; }
+      .dropdown-menu {
+        position: static; box-shadow: none; border: none; border-left: 2px solid #c05621;
+        border-radius: 0; margin-top: 0; margin-left: 10px; padding: 4px 0 8px 10px; background: #f7fafc;
+      }
+      .dropdown-menu a { padding: 8px 0; font-size: 0.88rem; white-space: normal; }
+      .dropdown-menu a:hover { padding-left: 4px; }
+      .meta-grid, .img-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-topbar">
+    <div class="container topbar-content">
+      <div class="site-title"><a href="e-portfolio-oto.html">E-PORTFOLIO · NGUYỄN VĂN A</a></div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Mở/đóng menu" onclick="toggleNavMenu()">☰</button>
+      <nav class="site-nav" id="siteNav">
+        <a href="e-portfolio-oto.html">Trang chủ</a>
+        <a href="e-portfolio-oto.html#gioithieu">Giới thiệu</a>
+        <a href="e-portfolio-oto.html#hoctap">Học tập</a>
+        <div class="nav-dropdown" id="navDropdown">
+          <a href="e-portfolio-oto.html#thuchanh" class="dropdown-toggle" style="color:#c05621;font-weight:700;" onclick="handleDropdownClick(event)">
+            Thực hành xưởng <span class="dropdown-arrow">▾</span>
+          </a>
+          <div class="dropdown-menu">
+            <a href="e-portfolio-oto.html#thuchanh" class="dropdown-header-link">📌 Tổng quan 4 bài thực hành</a>
+            <a href="thuc-hanh-dong-co.html">🚗 1. Động cơ đốt trong</a>
+            <a href="thuc-hanh-dien-oto.html" style="background:#fffaf0;color:#c05621;font-weight:700;">⚡ 2. Điện – Điện tử ô tô (Đang xem)</a>
+            <a href="thuc-hanh-khung-gam.html">🛞 3. Khung gầm &amp; Phanh</a>
+            <a href="bao-duong-chan-doan.html">🔧 4. Bảo dưỡng &amp; OBD-II</a>
+          </div>
+        </div>
+        <a href="e-portfolio-oto.html#kynang">Kỹ năng</a>
+        <a href="e-portfolio-oto.html#lienhe">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BANNER CON -->
+  <section class="subpage-banner">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="e-portfolio-oto.html">Trang chủ E-Portfolio</a> / <a href="e-portfolio-oto.html#thuchanh">Nhật ký thực hành xưởng</a> / Thực hành Điện ô tô
+      </div>
+      <h1>Nhật Ký Thực Hành: Điện – Điện Tử &amp; Xe Điện Mới</h1>
+      <p>Mô-đun đấu nối mạch điện thân xe, kiểm tra máy phát, máy đề và an toàn hệ thống pin xe điện tại HueIC</p>
+    </div>
+  </section>
+
+  <main class="container">
+    
+    <article class="content-box">
+      <h2 class="section-title">1. Thông tin mô-đun thực hành</h2>
+      <div class="meta-grid">
+        <div><strong>Môn học:</strong> Thực hành Hệ thống Điện – Điện tử Ô tô (4 Tín chỉ)</div>
+        <div><strong>Địa điểm:</strong> Phòng thực hành Điện ô tô — Khoa Cơ khí HueIC</div>
+        <div><strong>Đối tượng thực hành:</strong> Sa bàn điện thân xe Toyota Vios &amp; Mô hình xe điện</div>
+        <div><strong>Thời lượng:</strong> 60 tiết thực hành xưởng</div>
+        <div><strong>Điểm đánh giá:</strong> 9.0 / 10 (Xếp loại: Xuất sắc)</div>
+        <div><strong>Kỹ năng đạt được:</strong> Đọc sơ đồ mạch, đo VOM, kiểm tra nạp xả</div>
+      </div>
+
+      <h2 class="section-title">2. Thiết bị đo kiểm chuyên dụng</h2>
+      <ul style="margin-left:20px;margin-bottom:20px;font-size:0.92rem;color:#4a5568;">
+        <li><strong>Đồng hồ vạn năng số (Digital Multimeter - VOM):</strong> Đo điện áp 12V, kiểm tra thông mạch và điện trở cuộn dây rơ-le.</li>
+        <li><strong>Bình ắc-quy GS 12V-45Ah &amp; Máy sạc ắc-quy chuyên dụng:</strong> Kiểm tra điện áp không tải và sụt áp khi đề.</li>
+        <li>Bút thử điện ô tô 12V-24V và bộ giắc cắm bấm cốt chống nước.</li>
+        <li>Đồ bảo hộ cách điện cấp độ CAT III 1000V dành cho khu vực tìm hiểu xe điện (EV).</li>
+      </ul>
+
+      <div class="img-grid">
+        <img src="./assets/ev_battery.jpg" alt="Thực hành hệ thống điện và khối pin xe điện">
+        <div>
+          <h3 style="font-size:1.1rem;color:#1a365d;margin-bottom:8px;">Hệ thống điện tử và công nghệ xe điện</h3>
+          <p style="font-size:0.9rem;color:#4a5568;">
+            Bên cạnh hệ thống điện 12V truyền thống, em được tìm hiểu nguyên lý khối pin cao áp, hệ thống quản lý pin BMS và quy tắc ngắt cầu chì khẩn cấp (Service Plug) trước khi sửa chữa xe điện.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="section-title">3. Các nội dung thực hành tiêu biểu</h2>
+
+      <!-- Nội dung 1 -->
+      <div class="step-block">
+        <div class="step-title">Nội dung 1: Đấu nối mạch đèn chiếu sáng &amp; Đèn xinhan</div>
+        <p class="step-desc">
+          Dựa vào sơ đồ mạch điện nguyên lý hãng Toyota, tiến hành bố trí cầu chì tổng, rơ-le 4 chân / 5 chân, công tắc điều khiển tích hợp trên vô lăng và đấu nối bóng đèn halogen / LED. 
+          Kiểm tra sụt áp trên dây dẫn đảm bảo &lt; 0.5V khi bật tải đầy đủ.
+        </p>
+      </div>
+
+      <!-- Nội dung 2 -->
+      <div class="step-block">
+        <div class="step-title">Nội dung 2: Kiểm tra máy phát điện xoay chiều (Alternator)</div>
+        <p class="step-desc">
+          Tháo rã cụm máy phát, kiểm tra độ mòn chổi than (đạt 11.5mm, tiêu chuẩn &gt; 5mm), đo kiểm tra thông mạch cuộn Rotor và cuộn Stator, dùng thang đo Diode trên VOM kiểm tra dàn chỉnh lưu 6 diode.
+        </p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Hạng mục đo kiểm</th>
+              <th>Tiêu chuẩn kỹ thuật</th>
+              <th>Số đo thực tế</th>
+              <th>Đánh giá</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Điện thế phát khi động cơ nổ</td>
+              <td>13.8V – 14.5V</td>
+              <td>14.2V</td>
+              <td class="val-pass">Hoạt động tốt</td>
+            </tr>
+            <tr>
+              <td>Điện trở cuộn kích từ Rotor</td>
+              <td>2.1 – 2.9 Ohm</td>
+              <td>2.4 Ohm</td>
+              <td class="val-pass">Cuộn dây không chập</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Nội dung 3 -->
+      <div class="step-block">
+        <div class="step-title">Nội dung 3: Đo kiểm các cảm biến hệ thống phun xăng EFI</div>
+        <p class="step-desc">
+          Dùng đồng hồ VOM đo điện trở cảm biến nhiệt độ nước làm mát (ECT Sensor) khi nhúng vào cốc nước ấm: điện trở giảm dần từ 2.4 kOhm (ở 20°C) xuống còn 320 Ohm (ở 80°C), xác nhận cảm biến nhiệt điện trở âm (NTC) hoạt động hoàn hảo.
+        </p>
+      </div>
+
+      <h2 class="section-title">4. Bài học &amp; Kỹ năng đúc kết</h2>
+      <p style="font-size:0.92rem;color:#4a5568;line-height:1.6;">
+        Mô-đun Điện ô tô rèn luyện cho em tư duy logic khi đọc sơ đồ nguyên lý (Wiring Diagram) và kỹ năng chẩn đoán chập chờn, đứt dây ngầm nhanh chóng bằng phương pháp đo thông mạch và sụt áp.
+      </p>
+
+      <div class="nav-buttons">
+        <a href="thuc-hanh-dong-co.html" class="btn-action btn-secondary">⬅ Bài trước: Thực hành Động cơ</a>
+        <a href="thuc-hanh-khung-gam.html" class="btn-action">Xem tiếp: Thực hành Khung gầm &amp; Phanh ➡</a>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 E-Portfolio Cá Nhân — Nguyễn Văn A | Lớp CĐ Ô tô K47 — Trường Cao đẳng Công nghiệp Huế</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNavMenu() {
+      var nav = document.getElementById('siteNav');
+      if (nav) nav.classList.toggle('open');
+    }
+
+    function handleDropdownClick(evt) {
+      if (window.innerWidth <= 768) {
+        evt.preventDefault();
+        var dropdown = document.getElementById('navDropdown');
+        if (dropdown) dropdown.classList.toggle('is-open');
+      }
+    }
+
+    document.addEventListener('click', function(e) {
+      var dropdown = document.getElementById('navDropdown');
+      var toggle = document.getElementById('menuToggle');
+      var nav = document.getElementById('siteNav');
+      if (dropdown && !dropdown.contains(e.target)) dropdown.classList.remove('is-open');
+      if (toggle && nav && !nav.contains(e.target) && !toggle.contains(e.target)) nav.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>
